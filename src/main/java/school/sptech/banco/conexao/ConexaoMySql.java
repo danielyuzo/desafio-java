@@ -7,7 +7,7 @@ public class ConexaoMySql extends Conexao {
     public ConexaoMySql() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost/GraphCar");
+        dataSource.setUrl("jdbc:mysql://localhost/GraphCarDesafio");
         dataSource.setUsername("GraphUser");
         dataSource.setPassword("Graph2023");
         this.conexaoDoBanco = new JdbcTemplate(dataSource);
