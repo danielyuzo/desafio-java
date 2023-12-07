@@ -1,26 +1,33 @@
 package school.sptech.model.componentes;
 
+import school.sptech.model.Medida;
 import school.sptech.utils.ColetaDadosUtils;
 
-public class Cpu implements Componente {
+public class Cpu extends Componente {
 
     private Double uso;
-    private Double temperatura;
 
     public Cpu() {
+        super(new Medida());
     }
 
-    public Cpu(Double uso, Double temperatura) {
+    public Cpu(Medida medida) {
+        super(medida);
+    }
+
+    public Cpu(Double uso) {
+        super(new Medida());
         this.uso = uso;
-        this.temperatura = temperatura;
+    }
+
+    public Cpu(Medida medida, Double uso) {
+        super(medida);
+        this.uso = uso;
     }
 
     @Override
     public void registrarDados() {
         this.uso = ColetaDadosUtils.LOOCA.getProcessador().getUso();
-        if (!ColetaDadosUtils.LOOCA.getSistema().getSistemaOperacional().equals("Windows")) {
-            this.temperatura = ColetaDadosUtils.LOOCA.getTemperatura().getTemperatura();
-        }
     }
 
     public Double getUso() {
@@ -31,19 +38,10 @@ public class Cpu implements Componente {
         this.uso = uso;
     }
 
-    public Double getTemperatura() {
-        return temperatura;
-    }
-
-    public void setTemperatura(Double temperatura) {
-        this.temperatura = temperatura;
-    }
-
     @Override
     public String toString() {
         return "Cpu{" +
                 "uso=" + uso +
-                ", temperatura=" + temperatura +
                 '}';
     }
 }

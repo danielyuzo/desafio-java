@@ -15,9 +15,8 @@ public class UsuarioRowMapper implements RowMapper<Usuario> {
         String email = resultSet.getString("email");
         String senha = resultSet.getString("senha");
         String cpf = resultSet.getString("cpf");
-        String foto = resultSet.getString("foto");
         Integer nivelAcesso = resultSet.getInt("nivelAcesso");
-        Usuario usuario = new Usuario(id, nome, email, senha, cpf, foto, nivelAcesso);
+        Usuario usuario = new Usuario(id, nome, email, senha, cpf, nivelAcesso);
         return usuario;
     }
 }

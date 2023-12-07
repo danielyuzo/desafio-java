@@ -5,7 +5,7 @@ import school.sptech.banco.dao.ChamadoDao;
 import school.sptech.integracoes.jira.JiraIntegracao;
 import school.sptech.integracoes.slack.SlackIntegracao;
 import school.sptech.model.Chamado;
-import school.sptech.model.DadosServidor;
+import school.sptech.model.Dados;
 import school.sptech.model.Servidor;
 import school.sptech.model.componentes.Componente;
 import school.sptech.model.componentes.Cpu;
@@ -20,7 +20,7 @@ import java.util.List;
 public class ChamadosController {
 
     public static void compararServidorBanco(Servidor servidor) throws IOException, InterruptedException {
-        List<DadosServidor> ultimosDados = servidor.getDadosServidorParaAberturaDeChamados();
+        List<Dados> ultimosDados = servidor.getDadosServidorParaAberturaDeChamados();
 
         ContadorChamados contador = new ContadorChamados();
         contador.popularDados(ultimosDados);
@@ -180,8 +180,8 @@ public class ChamadosController {
         private double maxRam;
         private double maxDisco;
 
-        private void popularDados(List<DadosServidor> ultimosDados) {
-            for (DadosServidor dado : ultimosDados) {
+        private void popularDados(List<Dados> ultimosDados) {
+            for (Dados dado : ultimosDados) {
                 for (Componente componente : dado.getComponentes()) {
                     if (componente instanceof Cpu) {
                         Cpu cpu = (Cpu) componente;

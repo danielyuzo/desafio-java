@@ -1,6 +1,6 @@
 package school.sptech.model;
 
-import school.sptech.banco.dao.DadosServidorDao;
+import school.sptech.banco.dao.DadosDao;
 import school.sptech.tasks.ChamadosTask;
 import school.sptech.tasks.ColetaDadosTask;
 
@@ -12,60 +12,55 @@ public class Servidor {
 
     private Integer idServidor;
     private String modeloServidor;
+    private String sistemaOperacional;
     private String hostname;
     private String mac;
-    private String finalidadeServidor;
-    private String sistemaOperacional;
-    private List<DadosServidor> dados;
+    private List<Dados> dados;
 
     public Servidor() {
         this.dados = new ArrayList<>();
     }
 
-    public Servidor(Integer idServidor, String modeloServidor, String hostname, String mac, String finalidadeServidor, String sistemaOperacional, List<DadosServidor> dados) {
+    public Servidor(Integer idServidor, String modeloServidor, String hostname, String mac, String sistemaOperacional, List<Dados> dados) {
         this.idServidor = idServidor;
         this.modeloServidor = modeloServidor;
         this.hostname = hostname;
         this.mac = mac;
-        this.finalidadeServidor = finalidadeServidor;
         this.sistemaOperacional = sistemaOperacional;
         this.dados = dados;
     }
 
-    public Servidor(Integer idServidor, String modeloServidor, String hostname, String mac, String finalidadeServidor, String sistemaOperacional) {
+    public Servidor(Integer idServidor, String modeloServidor, String hostname, String mac, String sistemaOperacional) {
         this.idServidor = idServidor;
         this.modeloServidor = modeloServidor;
         this.hostname = hostname;
         this.mac = mac;
-        this.finalidadeServidor = finalidadeServidor;
         this.sistemaOperacional = sistemaOperacional;
         this.dados = new ArrayList<>();
     }
 
-    public Servidor(String modeloServidor, String hostname, String mac, String finalidadeServidor, String sistemaOperacional, List<DadosServidor> dados) {
+    public Servidor(String modeloServidor, String hostname, String mac, String sistemaOperacional, List<Dados> dados) {
         this.modeloServidor = modeloServidor;
         this.hostname = hostname;
         this.mac = mac;
-        this.finalidadeServidor = finalidadeServidor;
         this.sistemaOperacional = sistemaOperacional;
         this.dados = dados;
     }
 
-    public Servidor(String modeloServidor, String hostname, String mac, String finalidadeServidor, String sistemaOperacional) {
+    public Servidor(String modeloServidor, String hostname, String mac, String sistemaOperacional) {
         this.modeloServidor = modeloServidor;
         this.hostname = hostname;
         this.mac = mac;
-        this.finalidadeServidor = finalidadeServidor;
         this.sistemaOperacional = sistemaOperacional;
         this.dados = new ArrayList<>();
     }
 
-    public void adicionarDado(DadosServidor dado) {
+    public void adicionarDado(Dados dado) {
         if (dado != null) {
             dado.setFkServidor(this.idServidor);
-            DadosServidorDao.inserirDadosServidor(dado);
+            DadosDao.inserirDados(dado);
             String dataHora = dado.getDateDado().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            dado = DadosServidorDao.buscarDadosServidorPorServidorEDataHora(this.idServidor, dataHora);
+            dado = DadosDao.buscarDadosPorServidorEDataHora(this.idServidor, dataHora);
             this.dados.add(dado);
         }
     }
@@ -74,7 +69,7 @@ public class Servidor {
 
     }
 
-    public DadosServidor getUltimoDadosServidor() {
+    public Dados getUltimoDadosServidor() {
         if (this.dados.isEmpty()) {
             return null;
         } else {
@@ -82,8 +77,8 @@ public class Servidor {
         }
     }
 
-    public List<DadosServidor> getDadosServidorParaAberturaDeChamados() {
-        List<DadosServidor> ultimosDados = new ArrayList<>();
+    public List<Dados> getDadosServidorParaAberturaDeChamados() {
+        List<Dados> ultimosDados = new ArrayList<>();
 
         Integer qtdeChamados = ChamadosTask.PERIODO / ColetaDadosTask.PERIODO;
 
@@ -126,13 +121,6 @@ public class Servidor {
         this.mac = mac;
     }
 
-    public String getFinalidadeServidor() {
-        return finalidadeServidor;
-    }
-
-    public void setFinalidadeServidor(String finalidadeServidor) {
-        this.finalidadeServidor = finalidadeServidor;
-    }
 
     public String getSistemaOperacional() {
         return sistemaOperacional;

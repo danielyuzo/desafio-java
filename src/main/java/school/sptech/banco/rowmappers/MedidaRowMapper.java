@@ -1,0 +1,23 @@
+package school.sptech.banco.rowmappers;
+
+import org.springframework.jdbc.core.RowMapper;
+import school.sptech.model.Medida;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class MedidaRowMapper implements RowMapper<Medida> {
+
+    @Override
+    public Medida mapRow(ResultSet resultSet, int i) throws SQLException {
+
+        Integer idServidorComponente = resultSet.getInt("idServidorComponente");
+        String nome = resultSet.getString("nome");
+        String unidade = resultSet.getString("unidade");
+        Double limiteAlerta = resultSet.getDouble("limiteAlerta");
+        Double limiteCritico = resultSet.getDouble("limiteCritico");
+        Double meta = resultSet.getDouble("meta");
+        Medida medida = new Medida(idServidorComponente, nome, unidade, limiteAlerta, limiteCritico, meta);
+        return medida;
+    }
+}

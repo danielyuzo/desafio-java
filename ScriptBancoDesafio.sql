@@ -1,8 +1,3 @@
--- SQLBook: Code
--- Active: 1685408949990@@localhost@3306@graphcar
-/*DROP USER 'GraphUser'@'%';
-DELETE FROM mysql.user where user = 'GraphUser';
-*/
 CREATE DATABASE IF NOT EXISTS GraphCarDesafio;
 
 CREATE USER 'GraphUser'@'%' IDENTIFIED BY 'Graph2023';
@@ -20,8 +15,8 @@ CREATE TABLE Usuario(
     nivelAcesso TINYINT
 );
 
-CREATE TABLE Componentes(
-	idComponentes INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE Componente(
+	idComponente INT PRIMARY KEY AUTO_INCREMENT,
     nomeComponente VARCHAR(10)
 );
 
@@ -43,7 +38,7 @@ CREATE TABLE Servidor(
     dataCriacao DATETIME
 );
 
-CREATE TABLE DadosServidor(
+CREATE TABLE Dados(
 	idDadosServidor INT PRIMARY KEY AUTO_INCREMENT,
     cpu DECIMAL(5,2),
     memoria DECIMAL(5,2),
@@ -57,7 +52,7 @@ CREATE TABLE ServidorComponente(
 	idServidorComponente INT PRIMARY KEY AUTO_INCREMENT,
     fkComponente INT,
     fkServidor INT,
-    FOREIGN KEY (fkComponente) REFERENCES Componentes(idComponentes),
+    FOREIGN KEY (fkComponente) REFERENCES Componente(idComponente),
     FOREIGN KEY (fkServidor) REFERENCES Servidor(idServidor)
 );
 
@@ -80,13 +75,13 @@ CREATE TABLE Chamado(
     dataAbertura DATETIME,
     ultimaMensagemSlack DATETIME,
     FOREIGN KEY (fkServidor) REFERENCES Servidor(idServidor),
-    FOREIGN KEY (fkComponente) REFERENCES Componentes(idComponentes)
+    FOREIGN KEY (fkComponente) REFERENCES Componente(idComponente)
 );
 INSERT INTO Usuario VALUES (NULL, 'ADM', 'admin@graphcar.com', '123456789', '00000000000', 4);
 
-INSERT INTO Componentes (idComponentes, nomeComponente) VALUES (NULL, "CPU");
-INSERT INTO Componentes (idComponentes, nomeComponente) VALUES (NULL, "RAM");
-INSERT INTO Componentes (idComponentes, nomeComponente) VALUES (NULL, "Disco");
+INSERT INTO Componente (idComponente, nomeComponente) VALUES (NULL, "CPU");
+INSERT INTO Componente (idComponente, nomeComponente) VALUES (NULL, "RAM");
+INSERT INTO Componente (idComponente, nomeComponente) VALUES (NULL, "Disco");
     
 CREATE OR REPLACE VIEW metas_dashboard AS
 	SELECT (SELECT meta FROM Medida WHERE idMedida = 2) AS meta_cpu, 

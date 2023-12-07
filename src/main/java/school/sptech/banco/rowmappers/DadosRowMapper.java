@@ -1,7 +1,7 @@
 package school.sptech.banco.rowmappers;
 
 import org.springframework.jdbc.core.RowMapper;
-import school.sptech.model.DadosServidor;
+import school.sptech.model.Dados;
 import school.sptech.model.componentes.Componente;
 import school.sptech.model.componentes.Cpu;
 import school.sptech.model.componentes.Disco;
@@ -13,15 +13,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DadosServidorRowMapper implements RowMapper<DadosServidor> {
+public class DadosRowMapper implements RowMapper<Dados> {
 
     @Override
-    public DadosServidor mapRow(ResultSet resultSet, int i) throws SQLException {
-        int id = resultSet.getInt("idDadosServidor");
+    public Dados mapRow(ResultSet resultSet, int i) throws SQLException {
+        int id = resultSet.getInt("idDados");
         List<Componente> componentes = new ArrayList<>();
         Double cpuUso = resultSet.getDouble("cpuUso");
         if (cpuUso != 0) {
-            componentes.add(new Cpu(cpuUso, resultSet.getDouble("cpuTemperatura")));
+            componentes.add(new Cpu(cpuUso));
         }
 
         Double memoria = resultSet.getDouble("memoria");
@@ -37,7 +37,7 @@ public class DadosServidorRowMapper implements RowMapper<DadosServidor> {
         LocalDateTime dataHora = resultSet.getTimestamp("dateDado").toLocalDateTime();
         Integer fkServidor = resultSet.getInt("fkServidor");
 
-        DadosServidor dado = new DadosServidor(id, componentes, dataHora, fkServidor);
+        Dados dado = new Dados(id, componentes, dataHora, fkServidor);
 
         return dado;
     }

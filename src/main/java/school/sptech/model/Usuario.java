@@ -7,20 +7,9 @@ public class Usuario {
     private String email;
     private String senha;
     private String cpf;
-    private String foto;
     private Integer nivelAcesso;
 
     public Usuario() {
-    }
-
-    public Usuario(Integer idUsuario, String nome, String email, String senha, String cpf, String foto, Integer nivelAcesso) {
-        this.idUsuario = idUsuario;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.cpf = cpf;
-        this.foto = foto;
-        this.nivelAcesso = nivelAcesso;
     }
 
     public Usuario(Integer idUsuario, String nome, String email, String senha, String cpf, Integer nivelAcesso) {
@@ -81,19 +70,23 @@ public class Usuario {
         this.cpf = cpf;
     }
 
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
     public Integer getNivelAcesso() {
         return nivelAcesso;
     }
 
     public void setNivelAcesso(Integer nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUsuario=" + idUsuario +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", nivelAcesso=" + nivelAcesso +
+                '}';
     }
 }

@@ -9,26 +9,18 @@ import java.util.List;
 
 public class ComponenteDao {
     public static List<Componente> buscarComponentesPorServidor(Servidor servidor) {
-        List<Componente> listaComponentes = DatabaseUtils.CONEXOES[1].getConexaoDoBanco().query("""
-                SELECT c.NomeComponente AS tipo FROM Componentes c INNER JOIN
+        List<Componente> listaComponentes = DatabaseUtils.CONEXOES[0].getConexaoDoBanco().query("""
+                SELECT c.NomeComponente AS tipo FROM Componente c INNER JOIN
                     ModeloComponente mc ON mc.fkComponente = c.idComponentes WHERE mc.fkServidor = ?
                 """, new ComponenteRowMapper(), servidor.getIdServidor());
-//        List<Componente> listaComponentes = DatabaseUtils.CONEXOES[0].getConexaoDoBanco().query("""
-//                SELECT c.NomeComponente AS tipo FROM Componentes c INNER JOIN
-//                    ModeloComponente mc ON mc.fkComponente = c.idComponentes WHERE mc.fkServidor = ?
-//                """, new ComponenteRowMapper(), servidor.getIdServidor());
         return listaComponentes;
     }
 
     public static void inserirComponentesServidor(Servidor servidor) {
-        DatabaseUtils.CONEXOES[1].getConexaoDoBanco().update("""
+        DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
                 INSERT INTO ModeloComponente (fkComponente, fkServidor) VALUES
                     (1, ?), (2, ?), (3, ?)
                 """, servidor.getIdServidor(), servidor.getIdServidor(), servidor.getIdServidor());
         // TODO Insert no Medida e no Medida Servidor Componente
-//        DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
-//                INSERT INTO ModeloComponente (fkComponente, fkServidor) VALUES
-//                    (1, ?), (2, ?), (3, ?)
-//                """, servidor.getIdServidor(), servidor.getIdServidor(), servidor.getIdServidor());
     }
 }

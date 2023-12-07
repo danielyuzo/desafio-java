@@ -1,18 +1,29 @@
 package school.sptech.model.componentes;
 
 import com.github.britooo.looca.api.group.discos.Volume;
+import school.sptech.model.Medida;
 import school.sptech.utils.ColetaDadosUtils;
 
 import java.util.List;
 
-public class Disco implements Componente {
+public class Disco extends Componente {
 
     private Double uso;
 
     public Disco() {
+        super(new Medida());
+    }
+    public Disco(Medida medida) {
+        super(medida);
     }
 
     public Disco(Double uso) {
+        super(new Medida());
+        this.uso = uso;
+    }
+
+    public Disco(Medida medida, Double uso) {
+        super(medida);
         this.uso = uso;
     }
 

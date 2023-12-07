@@ -4,11 +4,11 @@ import school.sptech.enums.AlterarComponenteEnum;
 import school.sptech.enums.MenuComponenteEnum;
 import school.sptech.utils.LeitoresUtils;
 
-public class MenuCriarComponente {
+public class MenuAlterarComponente {
 
     private MenuComponenteEnum componenteEscolhido;
 
-    public MenuCriarComponente(MenuComponenteEnum componenteEscolhido) {
+    public MenuAlterarComponente(MenuComponenteEnum componenteEscolhido) {
         this.componenteEscolhido = componenteEscolhido;
     }
 
@@ -36,4 +36,6 @@ public class MenuCriarComponente {
             }
         } while (opcao != AlterarComponenteEnum.VOLTAR);
     }
+
+
 }

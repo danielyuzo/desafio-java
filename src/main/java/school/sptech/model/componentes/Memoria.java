@@ -1,15 +1,24 @@
 package school.sptech.model.componentes;
 
+import school.sptech.model.Medida;
 import school.sptech.utils.ColetaDadosUtils;
 
-public class Memoria implements Componente {
+public class Memoria extends Componente {
 
     private Double uso;
 
     public Memoria() {
+        super(new Medida());
     }
-
+    public Memoria(Medida medida) {
+        super(medida);
+    }
     public Memoria(Double uso) {
+        super(new Medida());
+        this.uso = uso;
+    }
+    public Memoria(Medida medida, Double uso) {
+        super(medida);
         this.uso = uso;
     }
 

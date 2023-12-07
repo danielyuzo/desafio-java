@@ -8,7 +8,7 @@ public class MenuComponentes {
     public void exibirMenu() {
 
         MenuComponenteEnum opcao;
-        MenuCriarComponente criarComponente;
+        MenuAlterarComponente criarComponente;
         do {
             System.out.println("Escolha uma opção:");
             for (MenuComponenteEnum opcaoMenu : MenuComponenteEnum.values()) {
@@ -20,7 +20,7 @@ public class MenuComponentes {
                 case CPU:
                 case RAM:
                 case DISCO:
-                    criarComponente = new MenuCriarComponente(opcao);
+                    criarComponente = new MenuAlterarComponente(opcao);
                     criarComponente.exibirMenu();
                     break;
                 case VOLTAR:

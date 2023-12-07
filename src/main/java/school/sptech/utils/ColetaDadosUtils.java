@@ -1,13 +1,11 @@
 package school.sptech.utils;
 
 import com.github.britooo.looca.api.core.Looca;
-import com.github.britooo.looca.api.group.processos.Processo;
 import com.github.britooo.looca.api.group.rede.RedeInterface;
 import school.sptech.banco.dao.ComponenteDao;
-import school.sptech.banco.dao.DadosServidorDao;
+import school.sptech.banco.dao.DadosDao;
 import school.sptech.banco.dao.ServidorDao;
-import school.sptech.model.DadosServidor;
-import school.sptech.model.ProcessoServidor;
+import school.sptech.model.Dados;
 import school.sptech.model.Servidor;
 import school.sptech.model.componentes.Componente;
 
@@ -35,7 +33,7 @@ public class ColetaDadosUtils {
         if (servidorBuscado == null) {
             String nomeOs = LOOCA.getSistema().getSistemaOperacional();
             String modelo = LOOCA.getSistema().getFabricante();
-            Servidor servidor = new Servidor(modelo, hostName, mac, "Monitoramento de Veículos", nomeOs);
+            Servidor servidor = new Servidor(modelo, hostName, mac, nomeOs);
             ServidorDao.inserirServidor(servidor);
             servidor = ServidorDao.buscarServidorPorHostName(hostName);
             ComponenteDao.inserirComponentesServidor(servidor);
@@ -50,27 +48,18 @@ public class ColetaDadosUtils {
 
         List<Componente> componentes = ComponenteDao.buscarComponentesPorServidor(servidor);
 
-        DadosServidor dado = new DadosServidor(componentes, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), servidor.getIdServidor());
+        Dados dado = new Dados(componentes, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), servidor.getIdServidor());
 
         dado.registrarDados();
 
         servidor.adicionarDado(dado);
         dado = servidor.getUltimoDadosServidor();
 
-
-
-        List<Processo> processosLooca = LOOCA.getGrupoDeProcessos().getProcessos();
-
-        for (Processo processoAtual : processosLooca) {
-            ProcessoServidor processoServidor = new ProcessoServidor(processoAtual.getNome(), dado.getIdDadosServidor());
-            dado.adicionarProcesso(processoServidor);
-        }
-
         // return servidor;
     }
 
     public static String exibirResumo(Servidor servidor) {
-        Map<String, Object> listaResumo = DadosServidorDao.buscarResumoPorServidor(servidor.getIdServidor());
+        Map<String, Object> listaResumo = DadosDao.buscarResumoPorServidor(servidor.getIdServidor());
 
         return """
                 %s
