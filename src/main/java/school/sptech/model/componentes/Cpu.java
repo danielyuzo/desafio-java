@@ -5,8 +5,6 @@ import school.sptech.utils.ColetaDadosUtils;
 
 public class Cpu extends Componente {
 
-    private Double uso;
-
     public Cpu() {
         super(new Medida());
     }
@@ -16,32 +14,19 @@ public class Cpu extends Componente {
     }
 
     public Cpu(Double uso) {
-        super(new Medida());
-        this.uso = uso;
+        super(new Medida(), uso);
     }
-
     public Cpu(Medida medida, Double uso) {
-        super(medida);
-        this.uso = uso;
+        super(medida, uso);
     }
 
     @Override
     public void registrarDados() {
-        this.uso = ColetaDadosUtils.LOOCA.getProcessador().getUso();
-    }
-
-    public Double getUso() {
-        return uso;
-    }
-
-    public void setUso(Double uso) {
-        this.uso = uso;
+        super.setUso(ColetaDadosUtils.LOOCA.getProcessador().getUso());
     }
 
     @Override
     public String toString() {
-        return "Cpu{" +
-                "uso=" + uso +
-                '}';
+        return "Cpu{} " + super.toString();
     }
 }

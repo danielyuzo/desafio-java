@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Disco extends Componente {
 
-    private Double uso;
 
     public Disco() {
         super(new Medida());
@@ -18,13 +17,11 @@ public class Disco extends Componente {
     }
 
     public Disco(Double uso) {
-        super(new Medida());
-        this.uso = uso;
+        super(new Medida(), uso);
     }
 
     public Disco(Medida medida, Double uso) {
-        super(medida);
-        this.uso = uso;
+        super(medida, uso);
     }
 
     @Override
@@ -36,21 +33,11 @@ public class Disco extends Componente {
             espacoTotal += volumeAtual.getTotal();
             espacoUsado += volumeAtual.getTotal() - volumeAtual.getDisponivel();
         }
-        this.uso = 100.0 * espacoUsado / espacoTotal;
-    }
-
-    public Double getUso() {
-        return uso;
-    }
-
-    public void setUso(Double uso) {
-        this.uso = uso;
+        this.setUso(100.0 * espacoUsado / espacoTotal);
     }
 
     @Override
     public String toString() {
-        return "Disco{" +
-                "uso=" + uso +
-                '}';
+        return "Disco{} " + super.toString();
     }
 }

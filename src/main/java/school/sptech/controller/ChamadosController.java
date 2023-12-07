@@ -191,13 +191,6 @@ public class ChamadosController {
                                 this.maxCpu = cpu.getUso();
                             }
                         }
-
-                        if (cpu.getTemperatura() > 80) {
-                            this.alertasCpuTemp++;
-                            if (cpu.getTemperatura() > this.maxCpuTemp){
-                                this.maxCpuTemp = cpu.getTemperatura();
-                            }
-                        }
                     } else if (componente instanceof Memoria) {
                         Memoria ram = (Memoria) componente;
                         if (ram.getUso() > 70) {

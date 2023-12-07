@@ -5,7 +5,6 @@ import school.sptech.utils.ColetaDadosUtils;
 
 public class Memoria extends Componente {
 
-    private Double uso;
 
     public Memoria() {
         super(new Medida());
@@ -14,31 +13,19 @@ public class Memoria extends Componente {
         super(medida);
     }
     public Memoria(Double uso) {
-        super(new Medida());
-        this.uso = uso;
+        super(new Medida(), uso);
     }
     public Memoria(Medida medida, Double uso) {
-        super(medida);
-        this.uso = uso;
+        super(medida, uso);
     }
 
     @Override
     public void registrarDados() {
-        this.uso = 100. * ColetaDadosUtils.LOOCA.getMemoria().getEmUso() / ColetaDadosUtils.LOOCA.getMemoria().getTotal();
-    }
-
-    public Double getUso() {
-        return uso;
-    }
-
-    public void setUso(Double uso) {
-        this.uso = uso;
+        this.setUso(100. * ColetaDadosUtils.LOOCA.getMemoria().getEmUso() / ColetaDadosUtils.LOOCA.getMemoria().getTotal());
     }
 
     @Override
     public String toString() {
-        return "Memoria{" +
-                "uso=" + uso +
-                '}';
+        return "Memoria{} " + super.toString();
     }
 }
