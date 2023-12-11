@@ -18,3 +18,20 @@ Após o cadastro inicial, é exibido o menu principal, onde se pode iniciar o mo
 
 
 Após o Início do monitoramento, o sistema registra o uso de cada componente a cada 30 segundos. Além disso, as integrações com o Jira e Slack são realizadas a cada 5 minutos.
+
+
+## Configuração de Componentes
+
+## Configuração de Integrações
+
+Por padrão, a aplicação não realiza a criação automática de chamados e envio de mensagens; para tal, é necessário adicionar as configurações relevantes.
+
+**Criação de Chamados Jira**
+
+**Envio de mensagens ao Slack**
+
+A aplicação irá enviar uma mensagem ao Slack sempre que um chamado no Jira for:
+- For criado;
+- Mudar de status;
+- Permanecer no mesmo status por 24 horas;
+- For encerrado.
