@@ -12,3 +12,9 @@ Unidade: %
 Limite de alerta: > 70 %
 Limite crítico: > 90 %
 Meta: < 5 %
+
+Após o cadastro inicial, é exibido o menu principal, onde se pode iniciar o monitoramento, alterar as configurações dos componentes e visualizar o relatório do servidor.
+
+
+
+Após o Início do monitoramento, o sistema registra o uso de cada componente a cada 30 segundos. Além disso, as integrações com o Jira e Slack são realizadas a cada 5 minutos.
