@@ -2,16 +2,17 @@
 
 # Primeiro Acesso
 
-Usuário: ADM
-Login: urubu100
+- Usuário: ADM
+- Login: urubu100
 
 Após realizar o login, a aplicação verifica se o servidor já existe no banco. Em caso positivo, as configurações desse servidor são carregadas. Em caso negativo, os componentes do servidor são cadastrados com configurações padrão:
 
-Registros: Uso de CPU, uso de RAM e uso de Disco.
-Unidade: %
-Limite de alerta: > 70 %
-Limite crítico: > 90 %
-Meta: < 5 %
+- Registros: Uso de CPU, uso de RAM e uso de Disco;
+- Unidade: %;
+- Limite de alerta: > 70% de uso;
+- Limite crítico: > 90% de uso;
+- Meta para estado de alerta: < 10% do tempo;
+- Meta para estado crítico: < 5% do tempo.
 
 Após o cadastro inicial, é exibido o menu principal, onde se pode iniciar o monitoramento, alterar as configurações dos componentes e visualizar o relatório do servidor.
 
