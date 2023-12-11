@@ -23,13 +23,24 @@ Após o Início do monitoramento, o sistema registra o uso de cada componente a 
 
 ## Configuração de Componentes
 
+Neste menu é possível alterar tanto quais componentes devem ser monitorados, quanto seus respectivos limites para alertas, e metas de performance.
+
 ## Configuração de Integrações
 
 Por padrão, a aplicação não realiza a criação automática de chamados e envio de mensagens; para tal, é necessário adicionar as configurações relevantes.
 
 **Criação de Chamados Jira**
 
+São necessárias duas informações para a abertura de chamados automática no Jira:
+- URL base do projeto:
+
+- Sigla identificadora do Projeto:
+
 **Envio de mensagens ao Slack**
+
+Para que o envio de mensagens ao Slack seja realizado, é necessário configurar o Jira, confirme explicado na sessão acima.
+
+Para o Slack, é necessário configurar um Webhook, que deve ser então inserido na aplicação.
 
 A aplicação irá enviar uma mensagem ao Slack sempre que um chamado no Jira for:
 - For criado;
