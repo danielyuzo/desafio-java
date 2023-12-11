@@ -36,7 +36,7 @@ public class ColetaDadosUtils {
             Servidor servidor = new Servidor(modelo, hostName, mac, nomeOs);
             ServidorDao.inserirServidor(servidor);
             servidor = ServidorDao.buscarServidorPorHostName(hostName);
-            ComponenteDao.inserirComponentesServidor(servidor);
+            ComponenteDao.inserirComponenteServidor(servidor);
             return servidor;
         } else {
             return servidorBuscado;
@@ -46,7 +46,7 @@ public class ColetaDadosUtils {
     @SuppressWarnings({"oshi.util.platform.windows.WmiQueryHandler"})
     public static void monitorarDados(Servidor servidor) {
 
-        List<Componente> componentes = ComponenteDao.buscarComponentesPorServidor(servidor);
+        List<Componente> componentes = ComponenteDao.buscarComponentePorServidor(servidor);
 
         Dados dado = new Dados(componentes, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), servidor.getIdServidor());
 

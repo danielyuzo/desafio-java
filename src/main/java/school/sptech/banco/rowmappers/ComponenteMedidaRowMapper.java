@@ -17,12 +17,12 @@ public class ComponenteMedidaRowMapper implements RowMapper<Componente> {
         String tipo = resultSet.getString("tipo");
 
         Integer idServidorComponente = resultSet.getInt("idServidorComponente");
-        String nome = resultSet.getString("nome");
+        String nomeMedida = resultSet.getString("nomeMedida");
         String unidade = resultSet.getString("unidade");
         Double limiteAlerta = resultSet.getDouble("limiteAlerta");
         Double limiteCritico = resultSet.getDouble("limiteCritico");
         Double meta = resultSet.getDouble("meta");
-        Medida medida = new Medida(idServidorComponente, nome, unidade, limiteAlerta, limiteCritico, meta);
+        Medida medida = new Medida(idServidorComponente, nomeMedida, unidade, limiteAlerta, limiteCritico, meta);
         Componente comp = null;
         if (tipo.equals("CPU")) {
             comp = new Cpu(medida);
