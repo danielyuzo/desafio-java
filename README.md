@@ -33,7 +33,7 @@ Após o Início do monitoramento, o sistema registra o uso de cada componente a 
 Além disso, a integração com o Slack é realizada a cada 2 minutos.
 
 
-### Configuração de Componentes
+## Configuração de Componentes
 
 Neste menu é possível alterar tanto quais componentes devem ser monitorados
 quanto seus respectivos limites para alertas.
@@ -41,7 +41,7 @@ quanto seus respectivos limites para alertas.
 Após selecionar qual componente se deseja configurar, são exibidas as configurações
 atuais do mesmo, e as opções do que é possível alterar.
 
-### Configuração da Integração Slack
+## Configuração da Integração Slack
 
 Por padrão, a aplicação não realiza o envio de mensagens ao Slack.
 Para que o envio de mensagens seja realizado, é necessário configurar o Webhook
@@ -50,7 +50,7 @@ do Slack que deve ser então inserido na aplicação.
 A aplicação irá enviar uma mensagem ao Slack sempre que um componente ultrapassar
 o limite de alerta ou limite crítico.
 
-**Criando um WebHook**
+### Criando um WebHook
 
 Acesse o link:
 
