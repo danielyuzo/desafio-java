@@ -37,16 +37,18 @@ public class ComponenteDao {
                 INSERT INTO ServidorComponente (fkComponente, fkServidor) VALUES
                     (1, ?), (2, ?), (3, ?)
                 """, servidor.getIdServidor(), servidor.getIdServidor(), servidor.getIdServidor());
+
         List<ServidorComponente> listarServidorComponente = DatabaseUtils.CONEXOES[0]
                 .getConexaoDoBanco().query("""
                         SELECT * FROM ServidorComponente
                         WHERE fkServidor = ?
                         """, new ServidorComponenteRowMapper(), servidor.getIdServidor());
+
         for (ServidorComponente servidorComponente : listarServidorComponente) {
             DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
                 INSERT INTO Medida VALUES (NULL, 'Uso', '%', 1, 70, 90)
                 """);
         }
-        // TODO Insert no Medida e no Medida Servidor Componente
+
     }
 }

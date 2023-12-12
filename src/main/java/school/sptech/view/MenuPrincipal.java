@@ -58,7 +58,7 @@ public class MenuPrincipal {
             } else if (opcao == MenuPrincipalEnum.ALTERAR_COMPONENTE) {
                 MenuComponentes menuComponentes = new MenuComponentes();
                 menuComponentes.exibirMenu(servidor);
-                // System.out.println(ColetaDadosUtils.exibirResumo(servidor));
+
             } else if (opcao == MenuPrincipalEnum.ALTERAR_SLACK) {
                 System.out.println("Webhook Atual: %s".formatted(servidor.getWebhookSlack()));
                 System.out.println("Digite o novo WebHook do Slack:");

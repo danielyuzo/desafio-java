@@ -1,6 +1,8 @@
 out
 target
-
+modelagem_desafio.mwb
+teste_graphcar.mv.db
+teste_graphcar.trace.db
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

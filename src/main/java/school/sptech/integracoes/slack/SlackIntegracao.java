@@ -10,9 +10,6 @@ import java.net.http.HttpResponse;
 
 public class SlackIntegracao {
 
-//    public static final String BASE_URL_SLACK = "https://slack.com/api/chat.postMessage";
-//    public static final String WEBHOOK_SLACK = "https://hooks.slack.com/services/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";
-
     public static String enviarMensagem(String mensagem, Servidor servidor) throws IOException, InterruptedException {
         if (servidor.getWebhookSlack() != null) {
             HttpClient client = HttpClient.newHttpClient();

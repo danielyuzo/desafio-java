@@ -17,6 +17,23 @@ public class MedidaDao {
                 INNER JOIN Componente c ON c.idComponente = sc.fkComponente 
                 WHERE c.nomeComponente = ? AND sc.fkServidor = ?
                 """, new MedidaRowMapper(), tipoComponente, servidor.getIdServidor());
+
+        if (listaMedidas.isEmpty()) {
+            return null;
+        } else {
+            return listaMedidas.get(0);
+        }
+    }
+
+    public static Medida buscarMedidaPorDadosComponente(Integer idDado, String tipoComponente) {
+        List<Medida> listaMedidas = DatabaseUtils.CONEXOES[0].getConexaoDoBanco().query("""
+                SELECT m.* FROM Medida m 
+                INNER JOIN ServidorComponente sc ON m.idServidorComponente = sc.idServidorComponente
+                INNER JOIN Componente c ON c.idComponente = sc.fkComponente 
+                WHERE c.nomeComponente = ? AND sc.fkServidor = 
+                (SELECT fkServidor FROM Dados WHERE idDados = ?)
+                """, new MedidaRowMapper(), tipoComponente, idDado);
+
         if (listaMedidas.isEmpty()) {
             return null;
         } else {

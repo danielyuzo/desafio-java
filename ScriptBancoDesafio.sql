@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS GraphCarDesafio;
--- DROP DATABASE graphcardesafio;
+
 CREATE USER IF NOT EXISTS 'GraphUser'@'%' IDENTIFIED BY 'Graph2023';
 GRANT ALL PRIVILEGES ON GraphCarDesafio.* TO 'GraphUser'@'%';
 FLUSH PRIVILEGES;
@@ -56,53 +56,8 @@ CREATE TABLE Medida(
     FOREIGN KEY (idServidorComponente) REFERENCES ServidorComponente(idServidorComponente)
 );
 
-CREATE TABLE Chamado(
-    idChamado INT PRIMARY KEY AUTO_INCREMENT,
-    fkServidor INT,
-    fkComponente INT,
-    chaveJira VARCHAR(15),
-    status VARCHAR(30),
-    encerrado TINYINT,
-    critico TINYINT,
-    dataAbertura DATETIME,
-    ultimaMensagemSlack DATETIME,
-    FOREIGN KEY (fkServidor) REFERENCES Servidor(idServidor),
-    FOREIGN KEY (fkComponente) REFERENCES Componente(idComponente)
-);
 INSERT INTO Usuario VALUES (NULL, 'ADM', 'admin@graphcar.com', 'urubu100');
 
 INSERT INTO Componente (idComponente, nomeComponente) VALUES (NULL, "CPU");
 INSERT INTO Componente (idComponente, nomeComponente) VALUES (NULL, "RAM");
 INSERT INTO Componente (idComponente, nomeComponente) VALUES (NULL, "Disco");
-
-select * from dados ORDER BY idDados Desc;
-select * from servidor;
-
-select * from servidorComponente;
-select * from medida;
-
-
-
-
-
-
-
-
-    
-CREATE OR REPLACE VIEW metas_dashboard AS
-	SELECT (SELECT meta FROM Medida WHERE idMedida = 2) AS meta_cpu, 
-	(SELECT meta FROM Medida WHERE idMedida = 2) AS meta_gpu, 
-	(SELECT meta FROM Medida WHERE idMedida = 3) AS meta_bat;
-    
-CREATE OR REPLACE VIEW tempo_chamados AS
-	SELECT idChamado, fkServidor, fkComponente,
-		CASE WHEN encerrado = 1
-			THEN TIMEDIFF(ultimaMensagemSlack, dataAbertura)
-            ELSE TIMEDIFF(now(), dataAbertura) END AS tempo
-		FROM Chamado;
-        
-CREATE OR REPLACE VIEW tempo_chamados_porcent AS
-	SELECT s.idServidor AS idServidor, tc.fkComponente AS idComponente, COUNT(idChamado) qtdeChamados,
-		ROUND(100 * SUM(tc.tempo) / TIMEDIFF(now(), s.dataCriacao),2) AS tempoPorcent
-    FROM tempo_chamados tc INNER JOIN Servidor s 
-    ON s.idServidor = tc.fkServidor GROUP BY idServidor, idComponente;

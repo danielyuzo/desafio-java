@@ -15,10 +15,9 @@ public class ChamadosController {
 
     public static void enviarMensagens(Servidor servidor) throws IOException, InterruptedException {
         List<Dados> ultimosDados = servidor.getDadosServidorParaAberturaDeChamados();
-        System.out.println(ultimosDados);
         ContadorChamados contador = new ContadorChamados();
         contador.popularDados(ultimosDados);
-        System.out.println(contador);
+
         if (contador.alertasCpu > 1) {
             SlackIntegracao.enviarMensagem("""
                 Servidor %s - CPU atingiu nível %s
@@ -27,6 +26,7 @@ public class ChamadosController {
                     contador.maxCpu > contador.criticoCpu ? "Crítico" : "Alerta",
                     contador.maxCpu), servidor);
         }
+
         if (contador.alertasRam > 1) {
             SlackIntegracao.enviarMensagem("""
                 Servidor %s - RAM atingiu nível %s
@@ -35,6 +35,7 @@ public class ChamadosController {
                     contador.maxRam > contador.criticoRam ? "Crítico" : "Alerta",
                     contador.maxRam), servidor);
         }
+
         if (contador.alertasDisco > 1) {
             SlackIntegracao.enviarMensagem("""
                 Servidor %s - Disco atingiu nível %s
@@ -59,6 +60,7 @@ public class ChamadosController {
         private void popularDados(List<Dados> ultimosDados) {
             for (Dados dado : ultimosDados) {
                 for (Componente componente : dado.getComponentes()) {
+
                     if (componente instanceof Cpu) {
                         Cpu cpu = (Cpu) componente;
                         this.criticoCpu = cpu.getMedida().getLimiteCritico();
@@ -68,6 +70,7 @@ public class ChamadosController {
                                 this.maxCpu = cpu.getUso();
                             }
                         }
+
                     } else if (componente instanceof Memoria) {
                         Memoria ram = (Memoria) componente;
                         this.criticoRam = ram.getMedida().getLimiteCritico();
@@ -77,6 +80,7 @@ public class ChamadosController {
                                 this.maxRam = ram.getUso();
                             }
                         }
+
                     } else if (componente instanceof Disco) {
                         Disco disco = (Disco) componente;
                         this.criticoDisco = disco.getMedida().getLimiteCritico();

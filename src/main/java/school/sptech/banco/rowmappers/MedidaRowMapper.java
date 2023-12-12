@@ -17,6 +17,7 @@ public class MedidaRowMapper implements RowMapper<Medida> {
         Boolean ativa = resultSet.getBoolean("ativa");
         Double limiteAlerta = resultSet.getDouble("limiteAlerta");
         Double limiteCritico = resultSet.getDouble("limiteCritico");
+
         Medida medida = new Medida(idServidorComponente, nome, unidade, ativa, limiteAlerta, limiteCritico);
         return medida;
     }

@@ -1,6 +1,8 @@
 package school.sptech.model.componentes;
 
+import school.sptech.banco.dao.MedidaDao;
 import school.sptech.model.Medida;
+import school.sptech.model.Servidor;
 import school.sptech.utils.ColetaDadosUtils;
 
 public class Memoria extends Componente {
@@ -25,6 +27,12 @@ public class Memoria extends Componente {
         } else {
             this.setUso(null);
         }
+    }
+
+    @Override
+    public void atualizarMedida(Servidor servidor) {
+        Medida medida = MedidaDao.buscarMedidaPorServidorComponente(servidor, "RAM");
+        this.setMedida(medida);
     }
 
     @Override

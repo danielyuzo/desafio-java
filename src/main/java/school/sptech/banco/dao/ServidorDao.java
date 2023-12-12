@@ -12,6 +12,7 @@ public class ServidorDao {
         List<Servidor> listaServidores = DatabaseUtils.CONEXOES[0].getConexaoDoBanco().query("""
             SELECT * FROM Servidor WHERE hostname = ?
             """, new ServidorRowMapper(), hostname);
+
         if (listaServidores.isEmpty()) {
             return false;
         } else {
@@ -23,6 +24,7 @@ public class ServidorDao {
         List<Servidor> listaServidores = DatabaseUtils.CONEXOES[0].getConexaoDoBanco().query("""
             SELECT * FROM Servidor WHERE hostname = ?
             """, new ServidorRowMapper(), hostname);
+
         if (listaServidores.isEmpty()) {
             return null;
         } else {
@@ -34,6 +36,7 @@ public class ServidorDao {
         List<Servidor> listaServidores = DatabaseUtils.CONEXOES[0].getConexaoDoBanco().query("""
             SELECT * FROM Servidor WHERE mac = ?
             """, new ServidorRowMapper(), mac);
+
         if (listaServidores.isEmpty()) {
             return false;
         } else {
@@ -45,6 +48,7 @@ public class ServidorDao {
         List<Servidor> listaServidores = DatabaseUtils.CONEXOES[0].getConexaoDoBanco().query("""
             SELECT * FROM Servidor WHERE mac = ?
             """, new ServidorRowMapper(), mac);
+
         if (listaServidores.isEmpty()) {
             return null;
         } else {

@@ -15,14 +15,15 @@ public class ComponenteMedidaRowMapper implements RowMapper<Componente> {
     @Override
     public Componente mapRow(ResultSet resultSet, int i) throws SQLException {
         String tipo = resultSet.getString("tipo");
-
         Integer idServidorComponente = resultSet.getInt("idServidorComponente");
         String nomeMedida = resultSet.getString("nomeMedida");
         String unidade = resultSet.getString("unidade");
         Boolean ativa = resultSet.getBoolean("ativa");
         Double limiteAlerta = resultSet.getDouble("limiteAlerta");
         Double limiteCritico = resultSet.getDouble("limiteCritico");
+
         Medida medida = new Medida(idServidorComponente, nomeMedida, unidade, ativa, limiteAlerta, limiteCritico);
+
         Componente comp = null;
         if (tipo.equals("CPU")) {
             comp = new Cpu(medida);
@@ -31,6 +32,7 @@ public class ComponenteMedidaRowMapper implements RowMapper<Componente> {
         } else {
             comp = new Disco(medida);
         }
+
         return comp;
     }
 }

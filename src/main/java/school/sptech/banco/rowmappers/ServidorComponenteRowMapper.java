@@ -12,6 +12,7 @@ public class ServidorComponenteRowMapper implements RowMapper<ServidorComponente
         Integer idServidorComponente = resultSet.getInt("idServidorComponente");
         Integer fkComponente = resultSet.getInt("fkComponente");
         Integer fkServidor = resultSet.getInt("fkServidor");
+
         return new ServidorComponente(idServidorComponente, fkComponente, fkServidor);
     }
 }

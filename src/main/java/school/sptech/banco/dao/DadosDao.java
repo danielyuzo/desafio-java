@@ -17,6 +17,7 @@ public class DadosDao {
         List<Dados> listaDados = DatabaseUtils.CONEXOES[0].getConexaoDoBanco().query("""
             SELECT * FROM Dados WHERE fkServidor = ? AND dateDado = ?
             """, new DadosRowMapper(), fkServidor, dataHora);
+
         if (listaDados.isEmpty()) {
             return null;
         } else {

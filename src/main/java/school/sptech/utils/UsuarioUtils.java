@@ -19,8 +19,4 @@ public class UsuarioUtils {
         }
         return usuario;
     }
-
-    public static void criarAdministrador() {
-
-    }
 }

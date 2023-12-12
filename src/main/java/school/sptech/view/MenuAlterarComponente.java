@@ -36,6 +36,7 @@ public class MenuAlterarComponente {
                     medida.setAtiva(!medida.getAtiva());
                     MedidaDao.alterarMedida(medida);
                     break;
+
                 case ALTERAR_ALERTA:
                     Double novoLimiteAlerta;
                     do {
@@ -48,6 +49,7 @@ public class MenuAlterarComponente {
                     medida.setLimiteAlerta(novoLimiteAlerta);
                     MedidaDao.alterarMedida(medida);
                     break;
+
                 case ALTERAR_CRITICO:
                     Double novoLimiteCritico;
                     do {
@@ -57,15 +59,19 @@ public class MenuAlterarComponente {
                             System.out.println("Digite um valor entre 0 e 100");
                         }
                     } while (novoLimiteCritico < 0. || novoLimiteCritico > 100.);
-                    medida.setLimiteAlerta(novoLimiteCritico);
+                    medida.setLimiteCritico(novoLimiteCritico);
                     MedidaDao.alterarMedida(medida);
                     break;
+
                 case VOLTAR:
+                    servidor.alterarMedida(this.componenteEscolhido, medida);
                     System.out.println("Componente atualizado");
                     break;
+
                 default:
                     System.out.println("Digite uma opção válida!");
             }
+
         } while (opcao != AlterarComponenteEnum.VOLTAR);
     }
 

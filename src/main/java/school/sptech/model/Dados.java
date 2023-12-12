@@ -30,8 +30,9 @@ public class Dados {
         this.fkServidor = fkServidor;
     }
 
-    public void registrarDados() {
+    public void registrarDados(Servidor servidor) {
         for (Componente componenteDaVez : this.componentes) {
+            componenteDaVez.atualizarMedida(servidor);
             componenteDaVez.registrarDados();
         }
     }

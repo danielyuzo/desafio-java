@@ -1,7 +1,9 @@
 package school.sptech.model.componentes;
 
 import com.github.britooo.looca.api.group.discos.Volume;
+import school.sptech.banco.dao.MedidaDao;
 import school.sptech.model.Medida;
+import school.sptech.model.Servidor;
 import school.sptech.utils.ColetaDadosUtils;
 
 import java.util.List;
@@ -38,6 +40,12 @@ public class Disco extends Componente {
         } else {
             this.setUso(null);
         }
+    }
+
+    @Override
+    public void atualizarMedida(Servidor servidor) {
+        Medida medida = MedidaDao.buscarMedidaPorServidorComponente(servidor, "Disco");
+        this.setMedida(medida);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package school.sptech.model;
 
 import school.sptech.banco.dao.DadosDao;
+import school.sptech.enums.MenuComponenteEnum;
 import school.sptech.tasks.ChamadosTask;
 import school.sptech.tasks.ColetaDadosTask;
 
@@ -92,6 +93,10 @@ public class Servidor {
         }
 
         return ultimosDados;
+    }
+
+    public void alterarMedida(MenuComponenteEnum tipoComponente, Medida medida) {
+
     }
 
     public Integer getIdServidor() {

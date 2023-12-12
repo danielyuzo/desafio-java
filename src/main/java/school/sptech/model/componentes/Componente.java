@@ -2,6 +2,7 @@ package school.sptech.model.componentes;
 
 import school.sptech.enums.NivelAlertaEnum;
 import school.sptech.model.Medida;
+import school.sptech.model.Servidor;
 
 public abstract class Componente {
 
@@ -17,6 +18,8 @@ public abstract class Componente {
     }
 
     public abstract void registrarDados();
+
+    public abstract void atualizarMedida(Servidor servidor);
 
     public NivelAlertaEnum getNivelAlerta() {
         if (this.uso >= this.getMedida().getLimiteCritico()) {
