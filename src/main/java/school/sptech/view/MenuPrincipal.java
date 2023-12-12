@@ -1,5 +1,6 @@
 package school.sptech.view;
 
+import school.sptech.banco.dao.ServidorDao;
 import school.sptech.controller.AgendadorController;
 import school.sptech.enums.MenuPrincipalEnum;
 import school.sptech.model.Servidor;
@@ -31,10 +32,8 @@ public class MenuPrincipal {
 
             if (this.usuarioLogado == null) {
                 System.out.println("Usuário inválido!");
-            } else if (this.usuarioLogado.getNivelAcesso() != 4) {
-                System.out.println("Usuário não possui acesso à esta aplicação");
             }
-        } while ((this.usuarioLogado == null) || (this.usuarioLogado.getNivelAcesso() != 4));
+        } while (this.usuarioLogado == null);
 
         System.out.println("Bem-vindo(a), %s".formatted(this.usuarioLogado.getNome()));
     }
@@ -58,8 +57,14 @@ public class MenuPrincipal {
 
             } else if (opcao == MenuPrincipalEnum.ALTERAR_COMPONENTE) {
                 MenuComponentes menuComponentes = new MenuComponentes();
-                menuComponentes.exibirMenu();
+                menuComponentes.exibirMenu(servidor);
                 // System.out.println(ColetaDadosUtils.exibirResumo(servidor));
+            } else if (opcao == MenuPrincipalEnum.ALTERAR_SLACK) {
+                System.out.println("Webhook Atual: %s".formatted(servidor.getWebhookSlack()));
+                System.out.println("Digite o novo WebHook do Slack:");
+                String webhook = LeitoresUtils.LEITOR_TEXTO.nextLine();
+                servidor.setWebhookSlack(webhook);
+                ServidorDao.atualizarServidor(servidor);
             }
 
         } while (opcao != MenuPrincipalEnum.SAIR);

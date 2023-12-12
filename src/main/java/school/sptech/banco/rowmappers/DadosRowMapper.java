@@ -19,7 +19,7 @@ public class DadosRowMapper implements RowMapper<Dados> {
     public Dados mapRow(ResultSet resultSet, int i) throws SQLException {
         int id = resultSet.getInt("idDados");
         List<Componente> componentes = new ArrayList<>();
-        Double cpuUso = resultSet.getDouble("cpuUso");
+        Double cpuUso = resultSet.getDouble("cpu");
         if (cpuUso != 0) {
             componentes.add(new Cpu(cpuUso));
         }

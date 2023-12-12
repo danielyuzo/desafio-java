@@ -10,7 +10,7 @@ public class ChamadosTask extends TimerTask {
 
     private Servidor servidor;
     public static final int DELAY = 1000;
-    public static final int PERIODO = 60000;
+    public static final int PERIODO = 120000;
 
     public ChamadosTask(Servidor servidor) {
         this.servidor = servidor;
@@ -19,8 +19,7 @@ public class ChamadosTask extends TimerTask {
     @Override
     public void run() {
         try {
-            ChamadosController.compararServidorBanco(servidor);
-            ChamadosController.atualizarBancoSlack(servidor);
+            ChamadosController.enviarMensagens(servidor);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

@@ -5,6 +5,7 @@ public enum MenuPrincipalEnum {
 
     TOGGLE_MONITORAMENTO(1, "Iniciar/Parar Monitoramento"),
     ALTERAR_COMPONENTE(2, "Alterar Monitoramento de Componentes"),
+    ALTERAR_SLACK(3, "Alterar WebHook do Slack"),
     SAIR(0, "Sair");
 
     private int codigo;
@@ -21,6 +22,8 @@ public enum MenuPrincipalEnum {
                 return TOGGLE_MONITORAMENTO;
             case 2:
                 return ALTERAR_COMPONENTE;
+            case 3:
+                return ALTERAR_SLACK;
             case 0:
                 return SAIR;
             default:

@@ -35,7 +35,7 @@ public enum MenuComponenteEnum {
         return codigo;
     }
 
-    public String getDescricao() {
+    public String getNome() {
         return nome;
     }
 

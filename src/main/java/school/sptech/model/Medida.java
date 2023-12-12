@@ -5,25 +5,25 @@ public class Medida {
     private Integer idServidorComponente;
     private String nome;
     private String unidade;
+    private Boolean ativa;
     private Double limiteAlerta;
     private Double limiteCritico;
-    private Double meta;
 
-    public Medida(Integer idServidorComponente, String nome, String unidade, Double limiteAlerta, Double limiteCritico, Double meta) {
+    public Medida(Integer idServidorComponente, String nome, String unidade, Boolean ativa, Double limiteAlerta, Double limiteCritico) {
         this.idServidorComponente = idServidorComponente;
         this.nome = nome;
         this.unidade = unidade;
+        this.ativa = ativa;
         this.limiteAlerta = limiteAlerta;
         this.limiteCritico = limiteCritico;
-        this.meta = meta;
     }
 
     public Medida() {
         this.nome = "Uso";
         this.unidade = "%";
+        this.ativa = true;
         this.limiteAlerta = 70.0;
         this.limiteCritico = 90.0;
-        this.meta = 5.0;
     }
 
     public Integer getIdServidorComponente() {
@@ -50,6 +50,14 @@ public class Medida {
         this.unidade = unidade;
     }
 
+    public Boolean getAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(Boolean ativa) {
+        this.ativa = ativa;
+    }
+
     public Double getLimiteAlerta() {
         return limiteAlerta;
     }
@@ -66,23 +74,16 @@ public class Medida {
         this.limiteCritico = limiteCritico;
     }
 
-    public Double getMeta() {
-        return meta;
-    }
-
-    public void setMeta(Double meta) {
-        this.meta = meta;
-    }
-
     @Override
     public String toString() {
-        return "Medida{" +
-                "idMedida=" + idServidorComponente +
-                ", nome='" + nome + '\'' +
-                ", unidade='" + unidade + '\'' +
-                ", limiteAlerta=" + limiteAlerta +
-                ", limiteCritico=" + limiteCritico +
-                ", meta=" + meta +
-                '}';
+        return """
+            Medida: %s, em %s
+            Monitoramento ativo: %s
+            Limite para Estado de Alerta: %s %s
+            Limite para Estado Crítico: %s %s
+            """.formatted(nome, unidade,
+                ativa ? "Sim" : "Não",
+                limiteAlerta, unidade,
+                limiteCritico, unidade);
     }
 }

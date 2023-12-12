@@ -15,8 +15,8 @@ public class ServidorRowMapper implements RowMapper<Servidor> {
         String hostname = resultSet.getString("hostname");
         String so = resultSet.getString("sistemaOperacional");
         String mac = resultSet.getString("mac");
-
-        Servidor servidor = new Servidor(id, modelo, hostname, so, mac);
+        String webhookSlack = resultSet.getString("webhookSlack");
+        Servidor servidor = new Servidor(id, modelo, hostname, mac, webhookSlack, so);
         return servidor;
     }
 }

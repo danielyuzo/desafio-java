@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS GraphCarDesafio;
-
-CREATE USER 'GraphUser'@'%' IDENTIFIED BY 'Graph2023';
+-- DROP DATABASE graphcardesafio;
+CREATE USER IF NOT EXISTS 'GraphUser'@'%' IDENTIFIED BY 'Graph2023';
 GRANT ALL PRIVILEGES ON GraphCarDesafio.* TO 'GraphUser'@'%';
 FLUSH PRIVILEGES;
 
@@ -10,23 +10,12 @@ CREATE TABLE Usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50),
     email VARCHAR(100) UNIQUE,
-    senha VARCHAR(64),
-    cpf CHAR (11) UNIQUE,
-    nivelAcesso TINYINT
+    senha VARCHAR(64)
 );
 
 CREATE TABLE Componente(
 	idComponente INT PRIMARY KEY AUTO_INCREMENT,
     nomeComponente VARCHAR(10)
-);
-
-CREATE TABLE Medida(
-	idMedida INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(20),
-    unidade VARCHAR(20),
-    limiteAlerta DECIMAL(5,2),
-    limiteCritico DECIMAL(5,2),
-    meta DECIMAL(4,1)
 );
 
 CREATE TABLE Servidor(
@@ -35,11 +24,12 @@ CREATE TABLE Servidor(
     sistemaOperacional VARCHAR(45),
     hostname VARCHAR(45),
     mac CHAR(12),
+    webhookSlack VARCHAR(500),
     dataCriacao DATETIME
 );
 
 CREATE TABLE Dados(
-	idDadosServidor INT PRIMARY KEY AUTO_INCREMENT,
+	idDados INT PRIMARY KEY AUTO_INCREMENT,
     cpu DECIMAL(5,2),
     memoria DECIMAL(5,2),
     disco DECIMAL(5,2),
@@ -56,12 +46,14 @@ CREATE TABLE ServidorComponente(
     FOREIGN KEY (fkServidor) REFERENCES Servidor(idServidor)
 );
 
-CREATE TABLE MedidaServidorComponente(
-	fkServidorComponente INT,
-    fkMedida INT,
-    FOREIGN KEY (fkServidorComponente) REFERENCES ServidorComponente(idServidorComponente),
-    FOREIGN KEY (fkMedida) REFERENCES Medida(idMedida),
-    PRIMARY KEY (fkServidorComponente, fkMedida)
+CREATE TABLE Medida(
+	idServidorComponente INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(20),
+    unidade VARCHAR(20),
+    ativa TINYINT,
+    limiteAlerta DECIMAL(5,2),
+    limiteCritico DECIMAL(5,2),
+    FOREIGN KEY (idServidorComponente) REFERENCES ServidorComponente(idServidorComponente)
 );
 
 CREATE TABLE Chamado(
@@ -77,11 +69,25 @@ CREATE TABLE Chamado(
     FOREIGN KEY (fkServidor) REFERENCES Servidor(idServidor),
     FOREIGN KEY (fkComponente) REFERENCES Componente(idComponente)
 );
-INSERT INTO Usuario VALUES (NULL, 'ADM', 'admin@graphcar.com', '123456789', '00000000000', 4);
+INSERT INTO Usuario VALUES (NULL, 'ADM', 'admin@graphcar.com', 'urubu100');
 
 INSERT INTO Componente (idComponente, nomeComponente) VALUES (NULL, "CPU");
 INSERT INTO Componente (idComponente, nomeComponente) VALUES (NULL, "RAM");
 INSERT INTO Componente (idComponente, nomeComponente) VALUES (NULL, "Disco");
+
+select * from dados ORDER BY idDados Desc;
+select * from servidor;
+
+select * from servidorComponente;
+select * from medida;
+
+
+
+
+
+
+
+
     
 CREATE OR REPLACE VIEW metas_dashboard AS
 	SELECT (SELECT meta FROM Medida WHERE idMedida = 2) AS meta_cpu, 

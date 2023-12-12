@@ -1,14 +1,15 @@
 package school.sptech.view;
 
 import school.sptech.enums.MenuComponenteEnum;
+import school.sptech.model.Servidor;
 import school.sptech.utils.LeitoresUtils;
 
 public class MenuComponentes {
 
-    public void exibirMenu() {
+    public void exibirMenu(Servidor servidor) {
 
         MenuComponenteEnum opcao;
-        MenuAlterarComponente criarComponente;
+        MenuAlterarComponente alterarComponente;
         do {
             System.out.println("Escolha uma opção:");
             for (MenuComponenteEnum opcaoMenu : MenuComponenteEnum.values()) {
@@ -20,8 +21,8 @@ public class MenuComponentes {
                 case CPU:
                 case RAM:
                 case DISCO:
-                    criarComponente = new MenuAlterarComponente(opcao);
-                    criarComponente.exibirMenu();
+                    alterarComponente = new MenuAlterarComponente(opcao);
+                    alterarComponente.exibirMenu(servidor);
                     break;
                 case VOLTAR:
                     break;

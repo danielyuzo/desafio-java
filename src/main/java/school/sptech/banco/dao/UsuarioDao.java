@@ -24,16 +24,16 @@ public class UsuarioDao {
 
     public static void inserirUsuario(Usuario usuario) {
         DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
-            INSERT INTO usuario (nome, email, senha, cpf, nivelAcesso) 
-            VALUES (?, ?, ?, ?, ?)
-            """, usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getCpf(), usuario.getNivelAcesso());
+            INSERT INTO usuario (nome, email, senha) 
+            VALUES (?, ?, ?)
+            """, usuario.getNome(), usuario.getEmail(), usuario.getSenha());
     }
 
     public static void atualizarUsuario(Usuario usuario) {
         DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
-            UPDATE usuario SET nome = ?, email = ?, senha = ?, cpf = ?, 
-            nivelAcesso = ? WHERE id = ?
-            """, usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getCpf(), usuario.getNivelAcesso(), usuario.getIdUsuario());
+            UPDATE usuario SET nome = ?, email = ?, senha = ?,
+            WHERE id = ?
+            """, usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getIdUsuario());
     }
 
     public static void apagarUsuario(Usuario usuario) {

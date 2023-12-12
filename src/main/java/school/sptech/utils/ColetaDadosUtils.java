@@ -31,14 +31,22 @@ public class ColetaDadosUtils {
 
         Servidor servidorBuscado = ServidorDao.buscarServidorPorMac(mac);
         if (servidorBuscado == null) {
+            System.out.println("Servidor não encontrado. Realizando cadastro no banco:");
             String nomeOs = LOOCA.getSistema().getSistemaOperacional();
             String modelo = LOOCA.getSistema().getFabricante();
-            Servidor servidor = new Servidor(modelo, hostName, mac, nomeOs);
+            Servidor servidor = new Servidor(modelo, hostName, mac, null, nomeOs);
             ServidorDao.inserirServidor(servidor);
             servidor = ServidorDao.buscarServidorPorHostName(hostName);
-            ComponenteDao.inserirComponenteServidor(servidor);
+            System.out.println("""
+                Servidor %s cadastrado com sucesso!
+                Cadastrando componentes com configurações padrão
+                """.formatted(servidor.getHostname()));
+            ComponenteDao.inserirComponenteServidorPadrao(servidor);
             return servidor;
         } else {
+            System.out.println("""
+                Servidor %s encontrado na base de dados!
+                """.formatted(servidorBuscado.getHostname()));
             return servidorBuscado;
         }
     }
@@ -46,7 +54,7 @@ public class ColetaDadosUtils {
     @SuppressWarnings({"oshi.util.platform.windows.WmiQueryHandler"})
     public static void monitorarDados(Servidor servidor) {
 
-        List<Componente> componentes = ComponenteDao.buscarComponentePorServidor(servidor);
+        List<Componente> componentes = ComponenteDao.buscarComponenteMedidaPorServidor(servidor);
 
         Dados dado = new Dados(componentes, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), servidor.getIdServidor());
 

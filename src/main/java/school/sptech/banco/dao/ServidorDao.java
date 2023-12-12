@@ -54,21 +54,21 @@ public class ServidorDao {
 
     public static void inserirServidor(Servidor servidor) {
         DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
-            INSERT INTO Servidor (modeloServidor, hostname, mac, sistemaOperacional, dataCriacao)
-            VALUES (?, ?, ?, ?, now())
-            """, servidor.getModeloServidor(), servidor.getHostname(), servidor.getMac(), servidor.getSistemaOperacional());
+            INSERT INTO Servidor (modeloServidor, hostname, mac, sistemaOperacional, webhookSlack, dataCriacao)
+            VALUES (?, ?, ?, ?, ?, now())
+            """, servidor.getModeloServidor(), servidor.getHostname(), servidor.getMac(), servidor.getSistemaOperacional(), servidor.getWebhookSlack());
     }
 
     public static void atualizarServidor(Servidor servidor) {
         DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
             UPDATE Servidor SET modeloServidor = ?, hostname = ?, mac = ?, 
-            sistemaOperacional = ? WHERE id = ?
-            """, servidor.getModeloServidor(), servidor.getHostname(), servidor.getMac(), servidor.getSistemaOperacional(), servidor.getIdServidor());
+            sistemaOperacional = ?, webhookSlack = ? WHERE idServidor = ?
+            """, servidor.getModeloServidor(), servidor.getHostname(), servidor.getMac(), servidor.getSistemaOperacional(), servidor.getWebhookSlack(), servidor.getIdServidor());
     }
 
     public static void apagarServidor(Servidor servidor) {
         DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
-            DELETE FROM Servidor WHERE id = ?
+            DELETE FROM Servidor WHERE idServidor = ?
             """, servidor.getIdServidor());
     }
 

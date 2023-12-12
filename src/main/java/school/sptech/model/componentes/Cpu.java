@@ -22,7 +22,11 @@ public class Cpu extends Componente {
 
     @Override
     public void registrarDados() {
-        super.setUso(ColetaDadosUtils.LOOCA.getProcessador().getUso());
+        if (this.getMedida().getAtiva()) {
+            this.setUso(ColetaDadosUtils.LOOCA.getProcessador().getUso());
+        } else {
+            this.setUso(null);
+        }
     }
 
     @Override

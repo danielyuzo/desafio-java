@@ -5,7 +5,6 @@ import school.sptech.utils.ColetaDadosUtils;
 
 public class Memoria extends Componente {
 
-
     public Memoria() {
         super(new Medida());
     }
@@ -21,7 +20,11 @@ public class Memoria extends Componente {
 
     @Override
     public void registrarDados() {
-        this.setUso(100. * ColetaDadosUtils.LOOCA.getMemoria().getEmUso() / ColetaDadosUtils.LOOCA.getMemoria().getTotal());
+        if (this.getMedida().getAtiva()) {
+            this.setUso(100. * ColetaDadosUtils.LOOCA.getMemoria().getEmUso() / ColetaDadosUtils.LOOCA.getMemoria().getTotal());
+        } else {
+            this.setUso(null);
+        }
     }
 
     @Override

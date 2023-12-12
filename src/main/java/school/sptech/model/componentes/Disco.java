@@ -26,14 +26,18 @@ public class Disco extends Componente {
 
     @Override
     public void registrarDados() {
-        List<Volume> volumes = ColetaDadosUtils.LOOCA.getGrupoDeDiscos().getVolumes();
-        Long espacoTotal = 0L;
-        Long espacoUsado = 0L;
-        for (Volume volumeAtual : volumes) {
-            espacoTotal += volumeAtual.getTotal();
-            espacoUsado += volumeAtual.getTotal() - volumeAtual.getDisponivel();
+        if (this.getMedida().getAtiva()) {
+            List<Volume> volumes = ColetaDadosUtils.LOOCA.getGrupoDeDiscos().getVolumes();
+            Long espacoTotal = 0L;
+            Long espacoUsado = 0L;
+            for (Volume volumeAtual : volumes) {
+                espacoTotal += volumeAtual.getTotal();
+                espacoUsado += volumeAtual.getTotal() - volumeAtual.getDisponivel();
+            }
+            this.setUso(100.0 * espacoUsado / espacoTotal);
+        } else {
+            this.setUso(null);
         }
-        this.setUso(100.0 * espacoUsado / espacoTotal);
     }
 
     @Override

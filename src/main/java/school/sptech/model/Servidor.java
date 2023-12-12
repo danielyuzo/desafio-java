@@ -15,42 +15,47 @@ public class Servidor {
     private String sistemaOperacional;
     private String hostname;
     private String mac;
+    private String webhookSlack;
     private List<Dados> dados;
 
     public Servidor() {
         this.dados = new ArrayList<>();
     }
 
-    public Servidor(Integer idServidor, String modeloServidor, String hostname, String mac, String sistemaOperacional, List<Dados> dados) {
+    public Servidor(Integer idServidor, String modeloServidor, String hostname, String mac, String webhookSlack, String sistemaOperacional, List<Dados> dados) {
         this.idServidor = idServidor;
         this.modeloServidor = modeloServidor;
         this.hostname = hostname;
         this.mac = mac;
+        this.webhookSlack = webhookSlack;
         this.sistemaOperacional = sistemaOperacional;
         this.dados = dados;
     }
 
-    public Servidor(Integer idServidor, String modeloServidor, String hostname, String mac, String sistemaOperacional) {
+    public Servidor(Integer idServidor, String modeloServidor, String hostname, String mac, String webhookSlack, String sistemaOperacional) {
         this.idServidor = idServidor;
         this.modeloServidor = modeloServidor;
         this.hostname = hostname;
         this.mac = mac;
+        this.webhookSlack = webhookSlack;
         this.sistemaOperacional = sistemaOperacional;
         this.dados = new ArrayList<>();
     }
 
-    public Servidor(String modeloServidor, String hostname, String mac, String sistemaOperacional, List<Dados> dados) {
+    public Servidor(String modeloServidor, String hostname, String mac, String webhookSlack, String sistemaOperacional, List<Dados> dados) {
         this.modeloServidor = modeloServidor;
         this.hostname = hostname;
         this.mac = mac;
+        this.webhookSlack = webhookSlack;
         this.sistemaOperacional = sistemaOperacional;
         this.dados = dados;
     }
 
-    public Servidor(String modeloServidor, String hostname, String mac, String sistemaOperacional) {
+    public Servidor(String modeloServidor, String hostname, String mac, String webhookSlack, String sistemaOperacional) {
         this.modeloServidor = modeloServidor;
         this.hostname = hostname;
         this.mac = mac;
+        this.webhookSlack = webhookSlack;
         this.sistemaOperacional = sistemaOperacional;
         this.dados = new ArrayList<>();
     }
@@ -121,6 +126,13 @@ public class Servidor {
         this.mac = mac;
     }
 
+    public String getWebhookSlack() {
+        return webhookSlack;
+    }
+
+    public void setWebhookSlack(String webhookSlack) {
+        this.webhookSlack = webhookSlack;
+    }
 
     public String getSistemaOperacional() {
         return sistemaOperacional;

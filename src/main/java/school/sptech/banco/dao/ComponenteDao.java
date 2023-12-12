@@ -14,7 +14,7 @@ public class ComponenteDao {
     public static List<Componente> buscarComponentePorServidor(Servidor servidor) {
         List<Componente> listaComponentes = DatabaseUtils.CONEXOES[0].getConexaoDoBanco().query("""
                 SELECT c.NomeComponente AS tipo FROM Componente c INNER JOIN
-                    ModeloComponente mc ON mc.fkComponente = c.idComponentes WHERE mc.fkServidor = ?
+                    ServidorComponente sc ON sc.fkComponente = c.idComponente WHERE sc.fkServidor = ?
                 """, new ComponenteRowMapper(), servidor.getIdServidor());
         return listaComponentes;
     }
@@ -22,12 +22,12 @@ public class ComponenteDao {
     public static List<Componente> buscarComponenteMedidaPorServidor(Servidor servidor) {
         List<Componente> listaComponentes = DatabaseUtils.CONEXOES[0].getConexaoDoBanco().query("""
                 SELECT c.NomeComponente AS tipo, m.idServidorComponente as idServidorComponente,
-                    m.nome AS nomeMedida, m.unidade AS unidade, m.limiteAlerta AS limiteAlerta, 
-                    m.limiteCritico AS limiteCritico, m.meta AS meta
+                    m.nome AS nomeMedida, m.unidade AS unidade, m.ativa AS ativa,
+                    m.limiteAlerta AS limiteAlerta, m.limiteCritico AS limiteCritico
                     FROM Componente c INNER JOIN
                     ServidorComponente sc ON sc.fkComponente = c.idComponente
                     INNER JOIN Medida m ON m.idServidorComponente = sc.idServidorComponente
-                    WHERE mc.fkServidor = ?
+                    WHERE sc.fkServidor = ?
                 """, new ComponenteMedidaRowMapper(), servidor.getIdServidor());
         return listaComponentes;
     }
@@ -44,8 +44,8 @@ public class ComponenteDao {
                         """, new ServidorComponenteRowMapper(), servidor.getIdServidor());
         for (ServidorComponente servidorComponente : listarServidorComponente) {
             DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
-                INSERT INTO Medida VALUES (NULL, ?, ?, ?, ?, ?)
-                """, )
+                INSERT INTO Medida VALUES (NULL, 'Uso', '%', 1, 70, 90)
+                """);
         }
         // TODO Insert no Medida e no Medida Servidor Componente
     }

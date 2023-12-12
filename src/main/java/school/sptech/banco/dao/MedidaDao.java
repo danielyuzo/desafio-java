@@ -15,7 +15,7 @@ public class MedidaDao {
                 SELECT m.* FROM Medida m 
                 INNER JOIN ServidorComponente sc ON m.idServidorComponente = sc.idServidorComponente
                 INNER JOIN Componente c ON c.idComponente = sc.fkComponente 
-                WHERE c.nome = ? WHERE sc.fkServidor = ?
+                WHERE c.nomeComponente = ? AND sc.fkServidor = ?
                 """, new MedidaRowMapper(), tipoComponente, servidor.getIdServidor());
         if (listaMedidas.isEmpty()) {
             return null;
@@ -26,14 +26,14 @@ public class MedidaDao {
 
     public static void inserirMedida(Componente componente, Medida medida) {
         DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
-            INSERT INTO Medida (nome, unidade, limiteAlerta, limiteCritico, meta) VALUES (?,?,?,?,?)
-                """, medida.getNome(), medida.getUnidade(), medida.getLimiteAlerta(), medida.getLimiteCritico(), medida.getMeta());
+            INSERT INTO Medida (nome, unidade, ativa, limiteAlerta, limiteCritico) VALUES (?,?,?,?,?)
+                """, medida.getNome(), medida.getUnidade(), medida.getAtiva(), medida.getLimiteAlerta(), medida.getLimiteCritico());
     }
 
     public static void alterarMedida(Medida medida) {
         DatabaseUtils.CONEXOES[0].getConexaoDoBanco().update("""
-            UPDATE Medida SET nome = ?, unidade = ?, limiteAlerta = ?, limiteCritico = ?, meta = ?
-            WHERE idServidorComponente = ?                
-            """, medida.getNome(), medida.getUnidade(), medida.getLimiteAlerta(), medida.getLimiteCritico(), medida.getMeta(), medida.getIdServidorComponente());
+            UPDATE Medida SET nome = ?, unidade = ?, ativa = ?, limiteAlerta = ?, 
+            limiteCritico = ? WHERE idServidorComponente = ?                
+            """, medida.getNome(), medida.getUnidade(), medida.getAtiva(), medida.getLimiteAlerta(), medida.getLimiteCritico(), medida.getIdServidorComponente());
     }
 }
